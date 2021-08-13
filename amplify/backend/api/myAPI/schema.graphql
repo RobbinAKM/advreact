@@ -1,0 +1,19 @@
+type List @model {
+  id: ID!
+  title: String!
+  description: String
+  listItems: [ListItem] @connection(name: "ListListItem")
+}
+
+type ListItem @model {
+  id: ID!
+  title: String!
+  list: List @connection(name: "ListListItem")
+  action: [Action] @connection(name: "ListAction")
+}
+
+type Action @model {
+  id: ID!
+  action: String!
+  listItem: ListItem @connection(name: "ListAction")
+}

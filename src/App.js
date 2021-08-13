@@ -1,9 +1,10 @@
 import React, { useState, useReducer, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Amplify from "aws-amplify";
+import Amplify, { API, graphqlOperation } from "aws-amplify";
 import awsConfig from "./aws-exports";
 import { AmplifyAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
+import { listLists } from "./graphql/queries";
 
 Amplify.configure(awsConfig);
 
@@ -43,6 +44,14 @@ const Input = ({ setCheck, checked }) => {
 };
 
 function App() {
+  const [lists, setList] = useState([]);
+  async function fetch() {
+    var { data } = await API.graphql(graphqlOperation(listLists));
+    setList(data.listLists.items);
+  }
+  useEffect(() => {
+    fetch();
+  }, []);
   return (
     <AmplifyAuthenticator>
       <div className="App">
@@ -50,6 +59,11 @@ function App() {
           <Label>Welcome</Label>
           <Input />
         </Checkbox>
+        <ul>
+          {lists.map((list) => (
+            <li>list.title</li>
+          ))}
+        </ul>
         <AmplifySignOut />
       </div>
     </AmplifyAuthenticator>

@@ -60,8 +60,8 @@ function App() {
           <Input />
         </Checkbox>
         <ul>
-          {lists.map((list) => (
-            <li>list.title</li>
+          {lists.map((item) => (
+            <li>{item.title}</li>
           ))}
         </ul>
         <AmplifySignOut />

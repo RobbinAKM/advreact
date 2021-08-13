@@ -10,6 +10,11 @@
       "StackName": "amplify-advreact-dev-94013",
       "StackId": "arn:aws:cloudformation:us-east-1:724021319257:stack/amplify-advreact-dev-94013/0954da50-fbcf-11eb-a0df-0e508885cec5",
       "AmplifyAppId": "d20ka16oq8y2ng"
+    },
+    "categories": {
+      "auth": {
+        "advreact059103e4": {}
+      }
     }
   }
 }

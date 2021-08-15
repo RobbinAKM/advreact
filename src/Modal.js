@@ -2,6 +2,11 @@ import React, { useReducer } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
+import { createList } from "./graphql/mutations";
+
+import Amplify, { API, graphqlOperation } from "aws-amplify";
+import awsConfig from "./aws-exports";
+import { listLists } from "./graphql/queries";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -60,6 +65,14 @@ const SimpleModal = () => {
     setOpen(false);
   };
 
+  async function saveLists() {
+    var { title, description } = state;
+    var result = await API.graphql(
+      graphqlOperation(createList, { input: { title, description } })
+    );
+    setOpen(false);
+  }
+
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <form>
@@ -82,7 +95,7 @@ const SimpleModal = () => {
         />
       </form>
       <div style={{ margin: "20px" }}>
-        <button style={{ marginRight: "20px" }} onClick={() => setOpen(false)}>
+        <button style={{ marginRight: "20px" }} onClick={saveLists}>
           save
         </button>
         <button onClick={() => setOpen(false)}>cancel</button>

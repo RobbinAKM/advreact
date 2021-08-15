@@ -4,6 +4,7 @@ import Amplify, { API, graphqlOperation } from "aws-amplify";
 import awsConfig from "./aws-exports";
 import { AmplifyAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 import { listLists } from "./graphql/queries";
+import { onCreateList } from "./graphql/subscriptions";
 
 import SimpleModal from "./Modal";
 import Typography from "@material-ui/core/Typography";
@@ -17,12 +18,27 @@ Amplify.configure(awsConfig);
 
 function App() {
   const [lists, setList] = useState([]);
+  const [newLists, setNewList] = useState("");
   async function fetch() {
     var { data } = await API.graphql(graphqlOperation(listLists));
     setList(data.listLists.items);
   }
   useEffect(() => {
     fetch();
+  }, []);
+
+  useEffect(() => {
+    setList([newLists, ...lists]);
+  }, [newLists]);
+
+  function addToList({ data }) {
+    setNewList(data.onCreateList);
+  }
+
+  useEffect(() => {
+    var subscription = API.graphql(graphqlOperation(onCreateList)).subscribe({
+      next: ({ provider, value }) => addToList(value),
+    });
   }, []);
 
   return (

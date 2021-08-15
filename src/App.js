@@ -1,72 +1,32 @@
 import React, { useState, useReducer, useEffect } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import Amplify, { API, graphqlOperation } from "aws-amplify";
-import awsConfig from "./aws-exports";
-import { AmplifyAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
-import { listLists } from "./graphql/queries";
-
-Amplify.configure(awsConfig);
-
-const Checkbox = ({ children }) => {
-  const [checked, setCheck] = useState(true);
-  return React.Children.map(children, (child) => {
-    const clone = React.cloneElement(child, {
-      checked,
-      setCheck,
-    });
-    return clone;
-  });
-};
-
-const Label = ({ children, setCheck }) => {
-  return (
-    <h1
-      onClick={() => {
-        setCheck((state) => !state);
-      }}
-    >
-      {children}
-    </h1>
-  );
-};
-
-const Input = ({ setCheck, checked }) => {
-  return (
-    <input
-      type="checkbox"
-      checked={checked}
-      onChange={(e) => {
-        setCheck(e.target.checked);
-      }}
-    />
-  );
-};
+import SimpleModal from "./Modal";
+import Typography from "@material-ui/core/Typography";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+//import ImageIcon from "@material-ui/icons/Image";
 
 function App() {
-  const [lists, setList] = useState([]);
-  async function fetch() {
-    var { data } = await API.graphql(graphqlOperation(listLists));
-    setList(data.listLists.items);
-  }
-  useEffect(() => {
-    fetch();
-  }, []);
   return (
-    <AmplifyAuthenticator>
-      <div className="App">
-        <Checkbox>
-          <Label>Welcome</Label>
-          <Input />
-        </Checkbox>
-        <ul>
-          {lists.map((item) => (
-            <li>{item.title}</li>
-          ))}
-        </ul>
-        <AmplifySignOut />
-      </div>
-    </AmplifyAuthenticator>
+    <div>
+      <Typography variant="h3" gutterBottom style={{ textAlign: "center" }}>
+        welcome
+      </Typography>
+      <h3 style={{ margin: "20px" }}>list Name</h3>
+      <List>
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar>
+              <img src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary="Photos" secondary="Jan 9, 2014" />
+        </ListItem>
+      </List>
+      <SimpleModal />
+    </div>
   );
 }
 

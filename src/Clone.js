@@ -44,6 +44,10 @@ function App() {
     setList([newLists, ...lists]);
   }, [newLists]);
 
+  useEffect(() => {
+    fetch();
+  }, [lists]);
+
   //helper function to add in state instantly
   function addToList({ data }) {
     setNewList(data.onCreateList);

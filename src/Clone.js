@@ -41,6 +41,10 @@ function App() {
   }, []);
 
   useEffect(() => {
+    fetch();
+  }, [lists]);
+
+  useEffect(() => {
     setList([newLists, ...lists]);
   }, [newLists]);
 

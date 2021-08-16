@@ -54,7 +54,7 @@ function App() {
     var undeletedLists = lists.filter(
       (item) => item.id !== data.onDeleteList.id
     );
-    return { lists: undeletedLists };
+    setList({ lists: undeletedLists });
   }
 
   //for subscription

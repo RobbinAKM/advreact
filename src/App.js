@@ -6,6 +6,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
+import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
+import EditIcon from "@material-ui/icons/Edit";
 //import ImageIcon from "@material-ui/icons/Image";
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
       <h3 style={{ margin: "20px" }}>list Name</h3>
       <List>
         <ListItem>
+          <DeleteOutlinedIcon onClick={() => alert("hi")} />
+          <EditIcon style={{ margin: "20px" }} onClick={() => alert("there")} />
           <ListItemAvatar>
             <Avatar>
               <img src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" />

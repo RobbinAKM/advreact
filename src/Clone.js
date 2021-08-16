@@ -41,24 +41,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch();
-  }, [lists]);
-
-  useEffect(() => {
     setList([newLists, ...lists]);
   }, [newLists]);
 
   //helper function to add in state instantly
   function addToList({ data }) {
     setNewList(data.onCreateList);
-  }
-
-  //helper function to delete in state instantly
-  function deleteFromList({ data }) {
-    var undeletedLists = lists.filter(
-      (item) => item.id !== data.onDeleteList.id
-    );
-    setList({ lists: undeletedLists });
   }
 
   //for subscription
@@ -71,7 +59,7 @@ function App() {
     var deleteSubscription = API.graphql(
       graphqlOperation(onDeleteList)
     ).subscribe({
-      next: ({ provider, value }) => deleteFromList(value),
+      next: fetch(),
     });
 
     return () => {

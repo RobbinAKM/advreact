@@ -42,7 +42,7 @@ function App() {
 
   useEffect(() => {
     setList([newLists, ...lists]);
-  }, [newLists, lists]);
+  }, [newLists]);
 
   //helper function to add in state instantly
   function addToList({ data }) {
@@ -54,7 +54,6 @@ function App() {
     var undeletedLists = lists.filter(
       (item) => item.id !== data.onDeleteList.id
     );
-    return (lists = undeletedLists);
   }
 
   //for subscription

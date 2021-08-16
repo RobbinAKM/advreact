@@ -51,8 +51,10 @@ function App() {
 
   //helper function to delete in state instantly
   function deleteFromList({ data }) {
-    var newList = lists.filter((item) => item.id !== data.onDeleteList.id);
-    setList(newList);
+    var undeletedLists = lists.filter(
+      (item) => item.id !== data.onDeleteList.id
+    );
+    setList([...lists, undeletedLists]);
   }
 
   //for subscription

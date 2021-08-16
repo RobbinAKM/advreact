@@ -42,7 +42,7 @@ function App() {
 
   useEffect(() => {
     setList([newLists, ...lists]);
-  }, [newLists]);
+  }, [newLists, lists]);
 
   //helper function to add in state instantly
   function addToList({ data }) {

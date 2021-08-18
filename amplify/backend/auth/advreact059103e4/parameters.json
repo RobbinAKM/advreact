@@ -1,6 +1,6 @@
 {
     "identityPoolName": "advreact059103e4_identitypool_059103e4",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "advrea059103e4",
     "userPoolName": "advreact059103e4_userpool_059103e4",
     "autoVerifiedAttributes": [

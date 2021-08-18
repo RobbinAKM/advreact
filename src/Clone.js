@@ -8,7 +8,6 @@ import { deleteList } from "./graphql/mutations";
 import { onCreateList, onDeleteList } from "./graphql/subscriptions";
 
 import SimpleModal from "./Modal";
-import EditModal from "./EditModal";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -17,6 +16,8 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import EditIcon from "@material-ui/icons/Edit";
+
+import UploadImage from "./ImageHandler/UploadImage";
 
 Amplify.configure(awsConfig);
 
@@ -94,7 +95,7 @@ function App() {
               <DeleteOutlinedIcon onClick={() => deleteListById(item.id)} />
               <EditIcon
                 style={{ margin: "20px" }}
-                onClick={() => <EditModal id={item.id} />}
+                onClick={() => alert("edit")}
               />
               <ListItemAvatar>
                 <Avatar>
@@ -106,6 +107,8 @@ function App() {
           </List>
         ))}
         <SimpleModal />
+        <br />
+        <UploadImage />
       </div>
       <AmplifySignOut />
     </AmplifyAuthenticator>

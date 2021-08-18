@@ -9,6 +9,7 @@ import Avatar from "@material-ui/core/Avatar";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import EditIcon from "@material-ui/icons/Edit";
 //import ImageIcon from "@material-ui/icons/Image";
+import UploadImage from "./ImageHandler/UploadImage";
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
         </ListItem>
       </List>
       <SimpleModal />
+      <br />
+      <UploadImage />
     </div>
   );
 }

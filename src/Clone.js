@@ -8,6 +8,7 @@ import { deleteList } from "./graphql/mutations";
 import { onCreateList, onDeleteList } from "./graphql/subscriptions";
 
 import SimpleModal from "./Modal";
+import EditModal from "./EditModal";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -93,7 +94,7 @@ function App() {
               <DeleteOutlinedIcon onClick={() => deleteListById(item.id)} />
               <EditIcon
                 style={{ margin: "20px" }}
-                onClick={() => alert("there")}
+                onClick={() => <SimpleModal id={item.id} />}
               />
               <ListItemAvatar>
                 <Avatar>

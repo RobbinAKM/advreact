@@ -94,7 +94,7 @@ function App() {
               <DeleteOutlinedIcon onClick={() => deleteListById(item.id)} />
               <EditIcon
                 style={{ margin: "20px" }}
-                onClick={() => <SimpleModal id={item.id} />}
+                onClick={() => <EditModal id={item.id} />}
               />
               <ListItemAvatar>
                 <Avatar>

@@ -7,6 +7,7 @@ export const getList = /* GraphQL */ `
       id
       title
       description
+      imageKey
       listItems {
         items {
           id
@@ -32,6 +33,7 @@ export const listLists = /* GraphQL */ `
         id
         title
         description
+        imageKey
         listItems {
           nextToken
         }
@@ -51,6 +53,7 @@ export const getListItem = /* GraphQL */ `
         id
         title
         description
+        imageKey
         listItems {
           nextToken
         }
@@ -85,6 +88,7 @@ export const listListItems = /* GraphQL */ `
           id
           title
           description
+          imageKey
           createdAt
           updatedAt
         }
@@ -110,6 +114,7 @@ export const getAction = /* GraphQL */ `
           id
           title
           description
+          imageKey
           createdAt
           updatedAt
         }

@@ -2,7 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import { Storage } from "aws-amplify";
+import SaveIcon from "@material-ui/icons/Save";
+
+import { useS3 } from ".././hooks/useS3";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -13,38 +15,35 @@ const useStyles = makeStyles((theme) => ({
 const UploadImage = () => {
   const classes = useStyles();
   const InputRef = useRef();
+  const [uploadToS3] = useS3();
 
-  const [image, setImage] = useState(
-    "https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270"
-  );
-
-  const [filename, setFilename] = useState("");
-
-  useEffect(() => {
-    if (!filename) return;
-    const [file, extension] = filename.name.split(".");
-    const type = filename.type;
-    const key = `images/lists/${file}.${extension}`;
-    const result = Storage.put(key, filename, {
-      contentType: type,
-      metadata: {
-        app: "adv-react",
-      },
-    });
-    console.log(result);
-  }, [filename]);
+  const [image, setImage] = useState("");
+  const [uploadFile, setUploadFIle] = useState("");
 
   function handleInputChange(e) {
     var fileToUpload = e.target.files[0];
     if (!fileToUpload) return;
     var imageUrl = URL.createObjectURL(fileToUpload);
     setImage(imageUrl);
-    setFilename(fileToUpload);
+    setUploadFIle(fileToUpload);
+  }
+
+  function saveImage() {
+    uploadToS3(uploadFile);
+    console.log(uploadFile);
   }
 
   return (
     <div>
-      <img size="small" src={image} />
+      <img
+        style={{
+          border: "1px solid #ddd",
+          borderRadius: "4px",
+          padding: "5px",
+          width: "150px",
+        }}
+        src={image}
+      />
       <br />
       <input
         type="file"
@@ -60,7 +59,17 @@ const UploadImage = () => {
         startIcon={<CloudUploadIcon />}
         onClick={() => InputRef.current.click()}
       >
-        Upload
+        Upload Image
+      </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        size="small"
+        className={classes.button}
+        startIcon={<SaveIcon />}
+        onClick={saveImage}
+      >
+        Save
       </Button>
     </div>
   );

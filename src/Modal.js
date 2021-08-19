@@ -8,6 +8,8 @@ import Amplify, { API, graphqlOperation } from "aws-amplify";
 import awsConfig from "./aws-exports";
 import { listLists } from "./graphql/queries";
 
+import UploadImage from "./ImageHandler/UploadImage";
+
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
@@ -100,6 +102,7 @@ const SimpleModal = () => {
         </button>
         <button onClick={() => setOpen(false)}>cancel</button>
       </div>
+      <UploadImage />
     </div>
   );
 

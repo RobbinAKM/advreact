@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
@@ -67,13 +67,7 @@ const SimpleModal = () => {
     setOpen(false);
   };
 
-  async function saveLists() {
-    var { title, description } = state;
-    var result = await API.graphql(
-      graphqlOperation(createList, { input: { title, description } })
-    );
-    setOpen(false);
-  }
+  var { title, description } = state;
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -96,13 +90,15 @@ const SimpleModal = () => {
           }
         />
       </form>
+
+      <UploadImage
+        close={handleClose}
+        title={title}
+        description={description}
+      />
       <div style={{ margin: "20px" }}>
-        <button style={{ marginRight: "20px" }} onClick={saveLists}>
-          save
-        </button>
         <button onClick={() => setOpen(false)}>cancel</button>
       </div>
-      <UploadImage />
     </div>
   );
 

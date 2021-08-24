@@ -99,7 +99,7 @@ function App() {
               />
               <ListItemAvatar>
                 <Avatar>
-                  <img src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" />
+                  <img src={item.imageKey} />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary={item.title} secondary={item.description} />
@@ -108,7 +108,6 @@ function App() {
         ))}
         <SimpleModal />
         <br />
-        <UploadImage />
       </div>
       <AmplifySignOut />
     </AmplifyAuthenticator>

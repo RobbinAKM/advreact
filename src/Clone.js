@@ -18,6 +18,7 @@ import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import EditIcon from "@material-ui/icons/Edit";
 
 import UploadImage from "./ImageHandler/UploadImage";
+import Loading from "./Loading";
 
 Amplify.configure(awsConfig);
 
@@ -99,7 +100,7 @@ function App() {
               />
               <ListItemAvatar>
                 <Avatar>
-                  <img src={item.imageKey} />
+                  {item.imageKey ? <img src={item.imageKey} /> : <Loading />}
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary={item.title} secondary={item.description} />

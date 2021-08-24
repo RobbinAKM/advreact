@@ -9,6 +9,12 @@ import Avatar from "@material-ui/core/Avatar";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import EditIcon from "@material-ui/icons/Edit";
 //import ImageIcon from "@material-ui/icons/Image";
+import Loading from "./Loading";
+
+var photoSrc = {
+  link:
+    "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg",
+};
 
 function App() {
   return (
@@ -23,13 +29,14 @@ function App() {
           <EditIcon style={{ margin: "20px" }} onClick={() => alert("there")} />
           <ListItemAvatar>
             <Avatar>
-              <img src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" />
+              {photoSrc.link ? <img src={photoSrc.link} /> : <Loading />}
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Photos" secondary="Jan 9, 2014" />
         </ListItem>
       </List>
       <SimpleModal />
+
       <br />
     </div>
   );
